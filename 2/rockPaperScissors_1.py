@@ -22,6 +22,7 @@ def partTwo(f):
     winDict = {"A": "Y", "B": "Z", "C": "X"}
     lossDict = {"A": "Z", "B": "X", "C": "Y"}
     drawDict = {"A": "X", "B": "Y", "C": "Z"}
+
     for playedSymbol in f.readlines():
         result = playedSymbol.replace("\n", "").replace(" ", "")
         opponentSymbol = result[0]
@@ -35,7 +36,7 @@ def partTwo(f):
     print(myTotal)
 
 
-with (open("input.txt", "r") as f):
+with (open("2/input.txt", "r") as f):
     partOne(f)
     partTwo(f)
 

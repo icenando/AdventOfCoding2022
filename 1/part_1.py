@@ -1,6 +1,6 @@
 max_cal = 0
 
-with (open("input.txt") as f):
+with (open("1/input.txt") as f):
     tempSum = 0
     for elf in f.readlines():
         if elf == "\n":
