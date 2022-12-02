@@ -14,13 +14,30 @@ def partOne(f):
             myTotal += myPoints.get(result[-1])
         else:
             myTotal += 3 + myPoints.get(result[-1])
+    print(myTotal)
 
+
+def partTwo(f):
+    myTotal = 0
+    winDict = {"A": "Y", "B": "Z", "C": "X"}
+    lossDict = {"A": "Z", "B": "X", "C": "Y"}
+    drawDict = {"A": "X", "B": "Y", "C": "Z"}
+    for playedSymbol in f.readlines():
+        result = playedSymbol.replace("\n", "").replace(" ", "")
+        opponentSymbol = result[0]
+        mySymbol = result[1]
+        if mySymbol == "X":
+            myPoints += myPoints.get(lossDict.get(opponentSymbol))
+        elif mySymbol == "Y":
+            myPoints += 3 + myPoints.get(drawDict.get(opponentSymbol))
+        else:
+            myPoints += 6 + myPoints.get(winDict.get(opponentSymbol))
     print(myTotal)
 
 
 with (open("input.txt", "r") as f):
     partOne(f)
-
+    partTwo(f)
 
 # A Y   rock paper
 # B X   paper rock
@@ -34,6 +51,6 @@ with (open("input.txt", "r") as f):
 # Draw      3
 # Loss      0
 
-# X: 1
-# Y: 2
-# Z: 3
+# X: 1  lose
+# Y: 2  draw
+# Z: 3  win
