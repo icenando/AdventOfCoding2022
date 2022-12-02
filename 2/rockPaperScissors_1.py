@@ -28,16 +28,18 @@ def partTwo(f):
         opponentSymbol = result[0]
         mySymbol = result[1]
         if mySymbol == "X":
-            myPoints += myPoints.get(lossDict.get(opponentSymbol))
+            myTotal += myPoints.get(lossDict.get(opponentSymbol))
         elif mySymbol == "Y":
-            myPoints += 3 + myPoints.get(drawDict.get(opponentSymbol))
+            myTotal += 3 + myPoints.get(drawDict.get(opponentSymbol))
         else:
-            myPoints += 6 + myPoints.get(winDict.get(opponentSymbol))
+            myTotal += 6 + myPoints.get(winDict.get(opponentSymbol))
     print(myTotal)
 
 
 with (open("2/input.txt", "r") as f):
     partOne(f)
+
+with (open("2/input.txt", "r") as f):
     partTwo(f)
 
 # A Y   rock paper
