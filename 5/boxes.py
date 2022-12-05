@@ -1,3 +1,7 @@
+import re
+
+
+# SETUP
 with(open("5/input.txt") as f):
     initial = f.readlines()
 
@@ -6,14 +10,29 @@ for i, row in enumerate(rows_of_boxes):
     # WARNING! ***** NSFW *****
     rows_of_boxes[i] = rows_of_boxes[i][:-1].replace("    ", "[]").replace(" ", "").replace("][", "] [").split()
 
-instructions = initial[9::]
-# stacks_dict = dict.fromkeys(stack_nums, [])
-stacks_dict = {key: list() for key in stack_nums}
+instructions = initial[10::]
+for i, line in enumerate(instructions):
+    instructions[i] = list(map(int, re.findall(r'\d+', instructions[i])))
 
+stacks_dict = {key: list() for key in stack_nums}
 for stack in stack_nums:
     for row in rows_of_boxes:
         box = row[int(stack)-1]
         if box != "[]":
             stacks_dict[stack].append(row[int(stack)-1])
+    stacks_dict[stack].reverse()
 
-print(stacks_dict)
+# for i in stack_nums:
+#     print(stacks_dict[i])
+
+def move_crates(quantity, origin, destination):
+    global stacks_dict
+    for i in range(quantity):
+        crate = stacks_dict[str(origin)].pop()
+        stacks_dict[str(destination)].append(crate)
+
+for instruction in instructions:
+    move_crates(instruction[0], instruction[1], instruction[2])
+
+for i in stack_nums:
+    print(stacks_dict[i][-1])
