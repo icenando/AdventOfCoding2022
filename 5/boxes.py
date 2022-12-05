@@ -25,14 +25,22 @@ for stack in stack_nums:
 # for i in stack_nums:
 #     print(stacks_dict[i])
 
-def move_crates(quantity, origin, destination):
+# def move_crates_1(quantity, origin, destination):
+#     global stacks_dict
+#     for i in range(quantity):
+#         crate = stacks_dict[str(origin)].pop()
+#         stacks_dict[str(destination)].append(crate)
+
+def move_creates_2(quantity, origin, destination):
     global stacks_dict
-    for i in range(quantity):
-        crate = stacks_dict[str(origin)].pop()
-        stacks_dict[str(destination)].append(crate)
+    crates_to_move = len(stacks_dict[str(origin)]) - quantity
+    crates = stacks_dict[str(origin)][crates_to_move::]
+    del stacks_dict[str(origin)][crates_to_move::]
+    stacks_dict[str(destination)].extend(crates)
 
 for instruction in instructions:
-    move_crates(instruction[0], instruction[1], instruction[2])
+    # move_crates_1(instruction[0], instruction[1], instruction[2])
+    move_creates_2(instruction[0], instruction[1], instruction[2])
 
 for i in stack_nums:
     print(stacks_dict[i][-1])
