@@ -1,21 +1,34 @@
 def part_1(signals):
-    current_signal = []
-
-    for pointer_start in range(len(signals)):
-        current_signal.append(signals[pointer_start])
-        for pointer_end in range(1, 4):
-            if signals[pointer_start] != signals[pointer_end]:
-                current_signal.append(signals[pointer_end])
-                if len(current_signal) == 4:
-                    return pointer_end + 1
+    current_len = []
+    for i in range(len(signals)-4):
+        current_len.append(signals[i])
+        for j in range(1, 4):
+            # print(signals[i], signals[i+j])
+            if signals[i+j] in current_len:
+                current_len.clear()
+                break
             else:
-                current_signal = [current_signal[pointer_start + 1]]
-                pointer_start += pointer_end
+                current_len.append(signals[i+j])
+                if len(current_len) == 4:
+                    return i+j+1
 
-    return
-
+def part_2(signals):
+    current_len = []
+    for i in range(len(signals)-4):
+        current_len.append(signals[i])
+        for j in range(1, 14):
+            print(signals[i], signals[i+j])
+            if signals[i+j] in current_len:
+                current_len.clear()
+                break
+            else:
+                current_len.append(signals[i+j])
+                if len(current_len) == 14:
+                    return i+j+1
 
 if __name__ == "__main__":
     with (open("6/input.txt") as f):
         signals = f.read()
-    part_1(signals)
+    
+    # print(part_1(signals))
+    print(part_2(signals))
